@@ -1,0 +1,71 @@
+:root {
+    --clr-1: #052b2f;
+    --clr-2: #073438;
+    --clr-3: #0e4b50;
+    --clr-4: #2d8f85;
+    --clr-5: #637c54;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--clr-1);
+    display: grid;
+    place-content: center;
+}
+
+.card {
+    height: 60vh;
+    aspect-ratio: 1 / 1.5;
+    background-color: var(--clr-1);
+    border-radius: .5rem;
+    position: relative;
+    transition: --my-angle 20s;
+    cursor: pointer;
+}
+
+@property --my-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.card::before,
+.card::after {
+    content: '';
+    position: absolute;
+    inset: -1rem;
+    border-radius: inherit;
+    z-index: -1;
+    /* background-image: linear-gradient(var(--my-angle), var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4), var(--clr-5)); */
+    background-image: conic-gradient(from var(--my-angle), var(--clr-3), var(--clr-4), var(--clr-5), var(--clr-5), var(--clr-4), var(--clr-3));
+
+    animation: rotation 5s infinite linear;
+    animation-play-state: paused;
+}
+
+.card::before {
+    filter: blur(2rem);
+}
+
+.card:hover,
+.card:hover::before,
+.card:hover::after {
+    animation-play-state: running;
+}
+
+@keyframes rotation {
+    0% {
+        --my-angle: 0deg;
+    }
+
+    100% {
+        --my-angle: 360deg;
+    }
+}
