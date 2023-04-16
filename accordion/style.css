@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+svg {
+    display: block;
+}
+
+html,
+body {
+    color: #fffd;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #121212;
+}
+
+button {
+    color: inherit;
+    font-family: inherit;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+:root {
+    --accordion-padding: 1rem;
+    --accordion-gap: 1rem;
+    --svg-size: 2.2rem;
+    --svg-padding: .2rem;
+    --svg-heading-gap: 1rem;
+    --time: .5s;
+}
+
+.accordion-holder {
+    height: 40rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: var(--accordion-gap);
+}
+
+.accordion {
+    flex-basis: calc(var(--svg-size) + var(--accordion-padding) * 2);
+    padding: var(--accordion-padding);
+    border-radius: calc((var(--svg-size) + var(--accordion-padding)) / 2);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    cursor: pointer;
+    transition: flex-grow var(--time);
+}
+
+.accordion--active {
+    flex-grow: 1000;
+}
+
+.accordion::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #00000044;
+    z-index: -1;
+    transition: background-color var(--time);
+}
+
+.accordion--active::before {
+    background-color: #000000aa;
+}
+
+.accordion button {
+    display: flex;
+    align-items: center;
+    gap: var(--svg-heading-gap);
+}
+
+.accordion button span {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.accordion button svg {
+    width: var(--svg-size);
+    height: var(--svg-size);
+    padding: var(--svg-padding);
+    background-color: #121212;
+    border-radius: calc(var(--svg-size) / 2);
+}
+
+.accordion p {
+    margin-block-start: .5rem;
+    margin-inline: calc(var(--svg-size) + var(--svg-heading-gap));
+    color: #deee;
+    font-size: .9rem;
+    transform: translateY(2rem);
+    opacity: 0;
+}
+
+.accordion--active p {
+    transition: transform var(--time) calc(var(--time) - .1s), opacity var(--time) calc(var(--time) - .1s);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accordion img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: -2;
+    transition: transform var(--time) calc(var(--time) - .3s);
+}
+
+.accordion--active img {
+    transform: scale(1.1);
+}
