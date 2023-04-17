@@ -31,6 +31,14 @@ button {
 }
 
 :root {
+    /** COLORS */
+    --color-1: #602b00;
+    --color-2: #119933;
+    --color-3: #b1a144;
+    --color-4: #22afaa;
+    --color-5: #3cffaa;
+
+    /** */
     --accordion-padding: 1rem;
     --accordion-gap: 1rem;
     --svg-size: 2.2rem;
@@ -45,6 +53,7 @@ button {
     display: flex;
     flex-direction: row;
     gap: var(--accordion-gap);
+    contain: content;
 }
 
 .accordion {
@@ -58,10 +67,6 @@ button {
     transition: flex-grow var(--time);
 }
 
-.accordion--active {
-    flex-grow: 1000;
-}
-
 .accordion::before {
     content: '';
     position: absolute;
@@ -71,14 +76,53 @@ button {
     transition: background-color var(--time);
 }
 
-.accordion--active::before {
+.active {
+    flex-grow: 1000;
+}
+
+.active::before {
     background-color: #000000aa;
+}
+
+.accordion_1[class~='active'],
+.accordion_1:focus-within {
+    outline: .1rem solid var(--color-1);
+    outline-offset: .2rem;
+}
+
+.accordion_2[class~='active'],
+.accordion_2:focus-within {
+    outline: .1rem solid var(--color-2);
+    outline-offset: .2rem;
+}
+
+.accordion_3[class~='active'],
+.accordion_3:focus-within {
+    outline: .1rem solid var(--color-3);
+    outline-offset: .2rem;
+}
+
+.accordion_4[class~='active'],
+.accordion_4:focus-within {
+    outline: .1rem solid var(--color-4);
+    outline-offset: .2rem;
+}
+
+.accordion_5[class~='active'],
+.accordion_5:focus-within {
+    outline: .1rem solid var(--color-5);
+    outline-offset: .2rem;
 }
 
 .accordion button {
     display: flex;
     align-items: center;
     gap: var(--svg-heading-gap);
+}
+
+.accordion button:focus,
+.accordion button:focus-visible {
+    outline: none;
 }
 
 .accordion button span {
@@ -103,7 +147,7 @@ button {
     opacity: 0;
 }
 
-.accordion--active p {
+.active p {
     transition: transform var(--time) calc(var(--time) - .1s), opacity var(--time) calc(var(--time) - .1s);
     opacity: 1;
     transform: translateY(0);
@@ -116,9 +160,27 @@ button {
     inset: 0;
     object-fit: cover;
     z-index: -2;
-    transition: transform var(--time) calc(var(--time) - .3s);
 }
 
-.accordion--active img {
-    transform: scale(1.1);
+@media (max-width: 768px) {
+    .accordion-holder {
+        height: 45rem;
+        padding: 1rem;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 550px) {
+    :root {
+        --accordion-padding: .6rem;
+        --svg-size: 2rem;
+    }
+
+    .accordion p {
+        font-size: .8rem;
+    }
+
+    .accordion button span {
+        font-size: .9rem;
+    }
 }
