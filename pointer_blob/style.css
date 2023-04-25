@@ -1,0 +1,48 @@
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(13, 9, 26);
+}
+
+#blob {
+    width: 10rem;
+    aspect-ratio: 1;
+    background: #12c2e9;
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    translate: -50% -50%;
+    animation: animate-blob 10s infinite linear;
+    z-index: 2;
+}
+
+@keyframes animate-blob {
+    0% {
+        rotate: 0deg;
+    }
+
+    33.33% {
+        scale: 1 1.4;
+    }
+
+    66.66% {
+        scale: 1.4 1.1;
+    }
+
+    100% {
+        rotate: 720deg;
+    }
+}
+
+#blur {
+    background-color: transparent;
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(6rem);
+    z-index: 3;
+}
