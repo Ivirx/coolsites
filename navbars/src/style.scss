@@ -1,7 +1,109 @@
+:root {
+  --theme-0: #ae5ef2;
+  --theme-1: #2f8fcf;
+  --theme-2: #2fcf51;
+  --theme-3: #f2e75e;
+  --theme-4: #e95181;
+  --theme-5: #ae8ebf;
+  --theme-6: #ff8249;
+  --theme-7: #5ef2ff;
+  --theme-8: #747dff;
+  --theme-9: #e95181;
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+  margin: 0;
+  background-color: var(--theme-0);
+  transition: background-color .5s ease .2s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.horizontal-nav {
+  --padding-block: .5rem;
+  --padding-inline: 1rem;
+  --svg-size: 2.5rem;
+  --svg-padding: .5rem;
+  --icon-gap: 1rem;
+  --duration: .4s;
+
+  padding: var(--padding-block) var(--padding-inline);
+  background-color: aliceblue;
+  border-radius: .5rem;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--icon-gap);
+  position: relative;
+  isolation: isolate;
+
+  &>[class*='icon'] {
+    cursor: pointer;
+
+    svg {
+      width: var(--svg-size);
+      aspect-ratio: 1;
+      padding: var(--svg-padding);
+      display: block;
+    }
+  }
+
+  &__indicator {
+    width: var(--svg-size);
+    aspect-ratio: 1;
+    background-color: #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: var(--padding-block);
+    left: var(--padding-inline);
+    transition: left var(--duration) cubic-bezier(1, -0.20, 0, 1.20);
+    z-index: -1;
+
+    &.animate {
+      animation: animate var(--duration) ease-in-out;
+    }
+  }
+}
+
+@keyframes animate {
+  0% {
+    scale: 1;
+  }
+
+  5% {
+    scale: 1.20 .85;
+  }
+
+  80% {
+    scale: 1.20 .85;
+  }
+
+  90% {
+    scale: .95 1.15;
+  }
+
+  95% {
+    scale: 1.20 .85;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+@for $i from 0 through 9 {
+  div[data-id='#{$i}']>svg {
+    stroke: var(--theme-#{$i});
+  }
 }
