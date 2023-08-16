@@ -1,0 +1,98 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	color: #e2e2e2;
+	font-family: monospace;
+	background-color: #070815;
+}
+
+a {
+	color: inherit;
+	font-size: inherit;
+	text-decoration: none;
+}
+
+main {
+	min-width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tabs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tabs:hover .indicator,
+.tabs:focus-within .indicator {
+	--_scale: 0;
+	--_translate: 100%;
+	--_delay: calc(var(--_duration) / 1.5);
+}
+
+.tabs__item {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.tabs__item:hover .indicator,
+.tabs__item:focus-within .indicator {
+	--_scale: 1;
+	--_translate: 0;
+	--_delay: 0ms;
+}
+
+.tabs__item:hover + .tabs__item .indicator,
+.tabs__item:focus-within + .tabs__item .indicator {
+	--_translate: -100%;
+}
+
+.indicator {
+	--_duration: 280ms;
+
+	width: 100%;
+	height: 0.15em;
+	background-color: #f45;
+	scale: var(--_scale, 0) 1;
+	translate: var(--_translate, 1) 0;
+	transition: scale var(--_duration) ease-in-out var(--_delay, 0ms),
+		translate var(--_duration) ease-in-out;
+}
+/* .tabs__item:nth-child(1) .indicator {
+	background-color: rebeccapurple;
+}
+.tabs__item:nth-child(2) .indicator {
+	background-color: steelblue;
+}
+.tabs__item:nth-child(3) .indicator {
+	background-color: teal;
+}
+.tabs__item:nth-child(4) .indicator {
+	background-color: coral;
+} */
+
+.tabs__link {
+	padding: 1em 2em;
+	font-size: 1.15rem;
+	flex: 1 1 0px;
+}
+
+.tabs__link:focus-visible {
+	outline: none;
+}
+
+.tabs__link span {
+	position: relative;
+	z-index: 99;
+}
