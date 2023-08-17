@@ -35,7 +35,8 @@ main {
 .tabs:focus-within .indicator {
 	--_scale: 0;
 	--_translate: 100%;
-	--_delay: calc(var(--_duration) / 1.5);
+	--_scale-delay: 200ms;
+	--_transition-delay: 120ms;
 }
 
 .tabs__item {
@@ -50,24 +51,51 @@ main {
 .tabs__item:focus-within .indicator {
 	--_scale: 1;
 	--_translate: 0;
-	--_delay: 0ms;
+	--_scale-delay: 0ms;
+	--_transition-delay: 0ms;
 }
 
 .tabs__item:hover + .tabs__item .indicator,
 .tabs__item:focus-within + .tabs__item .indicator {
 	--_translate: -100%;
+	--_transition-delay: 0ms;
 }
 
 .indicator {
-	--_duration: 280ms;
+	--_duration: 300ms;
+	--_timing-function: linear(
+		0 0%,
+		0 1.8%,
+		0.01 3.6%,
+		0.03 6.35%,
+		0.07 9.1%,
+		0.13 11.4%,
+		0.19 13.4%,
+		0.27 15%,
+		0.34 16.1%,
+		0.54 18.35%,
+		0.66 20.6%,
+		0.72 22.4%,
+		0.77 24.6%,
+		0.81 27.3%,
+		0.85 30.4%,
+		0.88 35.1%,
+		0.92 40.6%,
+		0.94 47.2%,
+		0.96 55%,
+		0.98 64%,
+		0.99 74.4%,
+		1 86.4%,
+		1 100%
+	);
 
 	width: 100%;
 	height: 0.15em;
 	background-color: #f45;
 	scale: var(--_scale, 0) 1;
 	translate: var(--_translate, 1) 0;
-	transition: scale var(--_duration) ease-in-out var(--_delay, 0ms),
-		translate var(--_duration) ease-in-out;
+	transition: scale var(--_duration) var(--_timing-function) var(--_scale-delay, 0ms),
+		translate var(--_duration) var(--_timing-function) var(--_transition-delay, 0ms);
 }
 /* .tabs__item:nth-child(1) .indicator {
 	background-color: rebeccapurple;
@@ -80,6 +108,9 @@ main {
 }
 .tabs__item:nth-child(4) .indicator {
 	background-color: coral;
+}
+.tabs__item:nth-child(5) .indicator {
+	background-color: hotpink;
 } */
 
 .tabs__link {
@@ -90,9 +121,4 @@ main {
 
 .tabs__link:focus-visible {
 	outline: none;
-}
-
-.tabs__link span {
-	position: relative;
-	z-index: 99;
 }
