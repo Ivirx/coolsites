@@ -1,0 +1,123 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	min-width: 20rem;
+}
+
+body {
+	min-height: 100vh;
+	color: #eee;
+	font-family: 'Akronim', cursive;
+	background-color: #070815;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+main {
+	--_size: clamp(1.8rem, calc(0.23rem + 7.86vw), 5.26rem);
+
+	margin-inline: auto;
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+section {
+	margin-inline: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.colons {
+	padding: calc(var(--_size) / 2.5);
+	position: relative;
+}
+
+.colons::before,
+.colons::after {
+	content: '';
+	width: 12%;
+	aspect-ratio: 1 / 1;
+	background-color: #fff6;
+	border-radius: 40%;
+	position: absolute;
+}
+
+.colons::before {
+	top: 0;
+	translate: -50% 260%;
+}
+
+.colons::after {
+	bottom: 0;
+	translate: -50% -260%;
+}
+
+.dial {
+	padding-inline: 1.5rem;
+	border: 0.125rem solid #fffa;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.numbers {
+	height: var(--_size);
+}
+
+.slide {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	translate: 0 calc(var(--_on-element) * (-100% / var(--_total-elements)));
+	transition: translate 400ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.slide > span {
+	height: var(--_size);
+	color: #fffa;
+	font-size: var(--_size);
+	line-height: 1;
+}
+
+.hours .numbers:first-child .slide {
+	--_on-element: 0;
+	--_total-elements: 3;
+}
+
+.hours .numbers:last-child .slide {
+	--_on-element: 0;
+	--_total-elements: 10;
+}
+
+.minutes .numbers:first-child .slide {
+	--_on-element: 0;
+	--_total-elements: 6;
+}
+
+.minutes .numbers:last-child .slide {
+	--_on-element: 0;
+	--_total-elements: 10;
+}
+
+.seconds .numbers:first-child .slide {
+	--_on-element: 0;
+	--_total-elements: 6;
+}
+
+.seconds .numbers:last-child .slide {
+	--_on-element: 0;
+	--_total-elements: 10;
+}
