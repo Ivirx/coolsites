@@ -8,8 +8,8 @@ function setSlide(slide, value) {
 }
 
 function setTime(time, id) {
-	ones = parseInt(time % 10);
-	tens = parseInt(time / 10);
+	const ones = parseInt(time % 10);
+	const tens = parseInt(time / 10);
 
 	if (id === 'h') {
 		setSlide(hours[0], tens);
@@ -25,34 +25,36 @@ function setTime(time, id) {
 	}
 }
 
-const d = new Date();
-let hr = d.getHours();
-let min = d.getMinutes();
-let sec = d.getSeconds();
+setTimeout(() => {
+	const d = new Date();
+	let hr = d.getHours();
+	let min = d.getMinutes();
+	let sec = d.getSeconds();
 
-setTime(hr, 'h');
-setTime(min, 'm');
-setTime(sec, 's');
+	setTime(hr, 'h');
+	setTime(min, 'm');
+	setTime(sec, 's');
 
-setInterval(() => {
-	sec++;
-	if (sec >= 60) {
-		sec = 0;
+	setInterval(() => {
+		sec++;
+		if (sec >= 60) {
+			sec = 0;
 
-		min++;
-		if (min >= 60) {
-			min = 0;
+			min++;
+			if (min >= 60) {
+				min = 0;
 
-			hr++;
-			if (hr >= 24) {
-				hr = 0;
+				hr++;
+				if (hr >= 24) {
+					hr = 0;
+				}
+
+				setTime(hr, 'h');
 			}
 
-			setTime(hr, 'h');
+			setTime(min, 'm');
 		}
 
-		setTime(min, 'm');
-	}
-
-	setTime(sec, 's');
-}, 1000);
+		setTime(sec, 's');
+	}, 1000);
+}, 700);
