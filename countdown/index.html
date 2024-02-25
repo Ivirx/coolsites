@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap" />
+		<link rel="stylesheet" href="style.css" />
+		<script defer type="module" src="script.js"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+	</head>
+
+	<body
+		class="font-['Six_Caps',sans-serif] text-[length:var(--fz-950)] md:text-[length:var(--fz-900)] tracking-wider bg-[var(--bg)] flex justify-center items-center min-h-screen"
+	>
+		<main id="main" class="w-[clamp(17.5rem,100%,56rem)] my-[20vh] mx-6 relative" _="on load add .animate">
+			<h1 animate="1" class="text-[color:var(--light)] absolute top-0 left-0 -translate-y-full">
+				Just a little more . . .
+			</h1>
+			<section
+				class="flex justify-center items-center gap-4 [&_div]:cursor-pointer"
+				_="on click remove .animate from #main wait 1.5s add .animate to #main"
+			>
+				<div
+					id="days"
+					animate="2"
+					class="aspect-square flex-1 flex justify-center items-center relative isolate"
+				>
+					<span class="text-[color:var(--accent)] text-[length:var(--fz-960)] xl:text-[length:var(--fz-950)]"
+						>11</span
+					>
+					<span
+						class="text-[color:var(--bg)] text-[length:var(--fz-500)] md:text-[length:var(--fz-800)] [writing-mode:vertical-lr] leading-none absolute bottom-2 left-2 rotate-180"
+						>Days</span
+					>
+					<div
+						class="bg-[var(--light)] bg-[linear-gradient(140deg,#fff0_50%,var(--dark)_50%,var(--dark))] absolute inset-0 -z-10"
+					></div>
+				</div>
+				<div
+					id="hours"
+					animate="3"
+					class="aspect-square flex-1 flex justify-center items-center relative isolate"
+				>
+					<span class="text-[color:var(--accent)] text-[length:var(--fz-960)] xl:text-[length:var(--fz-950)]"
+						>04</span
+					>
+					<span
+						class="text-[color:var(--bg)] text-[length:var(--fz-500)] md:text-[length:var(--fz-800)] [writing-mode:vertical-lr] leading-none absolute bottom-2 left-2 rotate-180"
+						>Hours</span
+					>
+					<div
+						class="bg-[var(--light)] bg-[linear-gradient(140deg,#fff0_50%,var(--dark)_50%,var(--dark))] absolute inset-0 -z-10"
+					></div>
+				</div>
+				<div
+					id="minutes"
+					animate="4"
+					class="aspect-square flex-1 flex justify-center items-center relative isolate"
+				>
+					<span class="text-[color:var(--accent)] text-[length:var(--fz-960)] xl:text-[length:var(--fz-950)]"
+						>03</span
+					>
+					<span
+						class="text-[color:var(--bg)] text-[length:var(--fz-500)] md:text-[length:var(--fz-800)] [writing-mode:vertical-lr] leading-none absolute bottom-2 left-2 rotate-180"
+						>Minutes</span
+					>
+					<div
+						class="bg-[var(--light)] bg-[linear-gradient(140deg,#fff0_50%,var(--dark)_50%,var(--dark))] absolute inset-0 -z-10"
+					></div>
+					<div class="absolute -inset-[.1rem] -z-20 pointer-events-none">
+						<div
+							id="deg"
+							class="w-full h-full bg-[conic-gradient(from_var(--deg),#0000_92%,var(--accent)_98%,var(--accent))] relative -z-20"
+						></div>
+						<div class="bg-[var(--light)] absolute inset-[.25rem] -z-10"></div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
