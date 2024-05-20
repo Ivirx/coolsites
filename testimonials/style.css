@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	::-webkit-scrollbar {
+		@apply w-1.5 h-1.5;
+	}
+	::-webkit-scrollbar-track {
+		@apply bg-white;
+	}
+	::-webkit-scrollbar-thumb {
+		@apply bg-gray-400 rounded-full;
+	}
+
+	::selection {
+		@apply text-slate-50 bg-black;
+	}
+
+	body {
+		@apply font-['Montserrat',sans-serif] text-xs/[1.4] tracking-wider;
+	}
+}
+
+@layer utilities {
+	.font-mono {
+		@apply font-['Major_Mono_Display',monospace] font-bold tracking-normal;
+	}
+
+	.text-tiny {
+		@apply text-[.625rem]/[1.4];
+	}
+
+	.material-symbols-rounded {
+		font-variation-settings: "FILL" var(--_fill, 0), "wght" var(--_wght, 400), "GRAD" var(--_grad, 0),
+			"opsz" var(--_opsz, 48);
+	}
+}
+
+:root {
+	--delay: 48ms;
+	--child: 1;
+
+	--opacity: 0;
+}
+
+[animate] {
+	transition: 1000ms cubic-bezier(0.4, 0, 0.2, 1) calc(var(--delay) * var(--child));
+	transition-property: opacity, translate;
+}
+
+.comments > * [animate],
+.profiles > * [animate] {
+	opacity: var(--opacity);
+	translate: 5rem -2.4rem;
+}
+
+.comments > :first-child [animate],
+.profiles > :first-child [animate] {
+	opacity: var(--opacity);
+	translate: -5rem 2.4rem;
+}
+
+.comments > :nth-child(2) [animate],
+.profiles > :nth-child(2) [animate] {
+	opacity: 1;
+	translate: 0rem 0rem;
+}
