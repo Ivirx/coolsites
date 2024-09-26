@@ -1,0 +1,118 @@
+<html></html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" />
+
+    <!-- CSS -->
+    <style>
+        main {
+            opacity: 0;
+            transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1) 320ms;
+        }
+
+        main.load {
+            opacity: 1;
+        }
+    </style>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            ::-webkit-scrollbar {
+                @apply w-1.5 h-1.5;
+            }
+            ::-webkit-scrollbar-track {
+                @apply bg-white;
+            }
+            ::-webkit-scrollbar-thumb {
+                @apply bg-gray-400 rounded-none;
+            }
+
+            ::selection {
+                @apply text-white bg-black;
+            }
+
+            body {
+                @apply font-['Montserrat',sans-serif] text-xs/[1.4] tracking-wide;
+            }
+
+            .font-mono {
+                @apply font-['Major_Mono_Display',monospace] font-bold tracking-normal;
+            }
+
+            .text-xss {
+                @apply text-[.625rem];
+            }
+            .text-xsss {
+                @apply text-[.5rem];
+            }
+        }
+    </style>
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+
+    <script type="module" src="script.js"></script>
+
+    <!-- Title -->
+    <title>Calendar</title>
+</head>
+
+<body
+    class="min-h-screen text-gray-400 bg-indigo-50 bg-gradient-to-br from-transparent via-indigo-50 to-indigo-200 flex justify-center items-center relative isolate">
+    <main class="w-[clamp(12rem,100%,52rem)] mx-6 py-16 px-12 bg-white rounded-[2.25rem]" _="on load add .load">
+        <section>
+            <div class="flex items-center gap-4">
+                <button id="pre" class="previous fill-current hover:fill-rose-400 transition-all duration-200">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                        <path
+                            d="m368-417 157 157q19 19 19 45t-19 45q-19 18-45 18t-45-19L171-435q-9-9-14-21t-5-24q0-12 5-24t14-21l265-265q19-19 44.5-19t44.5 19q19 19 19 45t-19 45L368-543h403q26 0 44.5 18.5T834-480q0 26-18.5 44.5T771-417H368Z" />
+                    </svg>
+                </button>
+                <button id="nxt" class="next fill-current hover:fill-rose-400 transition-all duration-200">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                        <path
+                            d="M592-417H189q-26 0-44.5-18.5T126-480q0-26 18.5-44.5T189-543h403L435-700q-19-19-19-45t19-45q19-18 45-18t45 19l264 264q9 9 14 21t5 24q0 12-5 24t-14 21L524-170q-19 19-44.5 19T435-170q-19-19-19-45t19-45l157-157Z" />
+                    </svg>
+                </button>
+                <h1 class="w-max flex items-center relative isolate">
+                    <span class="text-lg/none">&nbsp;</span>
+                    <div id="month-wrapper"
+                        class="absolute inset-y-0 isolate [&>:nth-child(1)]:-translate-x-4 [&>:nth-child(1)]:translate-y-3 [&>:nth-child(2)]:-translate-x-0 [&>:nth-child(2)]:translate-y-0 [&>:nth-child(3)]:translate-x-4 [&>:nth-child(3)]:-translate-y-3 [&>:nth-child(1)]:opacity-0 [&>:nth-child(2)]:opacity-100 [&>:nth-child(3)]:opacity-0">
+                        <span class="month text-gray-800 text-lg/none font-bold uppercase block absolute transition-all duration-500">august</span>
+                        <span class="month text-gray-800 text-lg/none font-bold uppercase block absolute transition-all duration-500">dead</span>
+                        <span class="month text-gray-800 text-lg/none font-bold uppercase block absolute transition-all duration-500">october</span>
+                    </div>
+                    <span id="year" class="font-mono text-xss leading-none absolute top-full left-0 block">2024</span>
+                </h1>
+            </div>
+            <div class="mt-10 text-gray-300 font-semibold uppercase grid grid-cols-7 justify-items-center">
+                <span>SU</span>
+                <span>MO</span>
+                <span>TU</span>
+                <span>WE</span>
+                <span>TH</span>
+                <span>FR</span>
+                <span>SA</span>
+            </div>
+            <div class="date-grid mt-7 font-mono grid grid-cols-7 justify-items-center gap-y-7">
+            </div>
+            <template id="date-wrapper-template">
+                <div
+                    class="date-wrapper size-6 flex justify-center items-center relative isolate pointer-events-none [&>:nth-child(1)]:-translate-x-4 [&>:nth-child(1)]:translate-y-3 [&>:nth-child(2)]:-translate-x-0 [&>:nth-child(2)]:translate-y-0 [&>:nth-child(3)]:translate-x-4 [&>:nth-child(3)]:-translate-y-3 [&>:nth-child(1)]:opacity-0 [&>:nth-child(2)]:opacity-100 [&>:nth-child(3)]:opacity-0">
+                    <span class="absolute transition-all duration-500">1</span>
+                    <span class="absolute transition-all duration-500">2</span>
+                    <span class="absolute transition-all duration-500">3</span>
+                </div>
+            </template>
+        </section>
+    </main>
+</body>
+
+</html>
