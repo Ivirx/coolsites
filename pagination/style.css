@@ -1,0 +1,118 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+svg {
+	display: block;
+}
+
+:root {
+	--size: 2.25rem;
+	--gap: 2rem;
+	--primary-color: 105 237 226;
+}
+
+body {
+	min-height: 100vh;
+	font-family: "Krona One", sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	margin-inline: 1.25rem;
+	width: clamp(16rem, 100%, 55rem);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--gap);
+}
+
+button {
+	padding: 0;
+	color: inherit;
+	font: inherit;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.number {
+	width: var(--size);
+	aspect-ratio: 1 / 1;
+	font-weight: 300;
+	flex: 0 0 var(--size);
+	display: grid;
+	place-content: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.number span {
+	line-height: 1;
+}
+
+section {
+	--indicator-position: 1;
+	--tray-position: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--gap);
+	position: relative;
+}
+
+section::before {
+	content: "";
+	width: var(--size);
+	height: var(--size);
+	background-color: rgb(var(--primary-color));
+	border-radius: 0.5rem;
+	top: 50%;
+	left: calc((var(--indicator-position) * var(--size)) + ((var(--indicator-position) - 1) * var(--gap)));
+	position: absolute;
+	translate: -100% -50%;
+	transition: left 350ms linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%);
+}
+
+.double span {
+	transition: opacity 250ms ease-in-out;
+}
+
+.double span:last-child {
+	opacity: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	inset: 0;
+}
+
+.double.dots span:first-child {
+	opacity: 0;
+}
+
+.double.dots span:last-child {
+	opacity: 1;
+}
+
+.tray {
+	--_max-numbers: 4;
+
+	width: calc((var(--size) * var(--_max-numbers)) + (var(--gap) * (var(--_max-numbers) - 1)));
+	overflow: hidden;
+	flex: 0 0 calc((var(--size) * var(--_max-numbers)) + (var(--gap) * (var(--_max-numbers) - 1)));
+}
+
+.tray>div {
+	display: flex;
+	align-items: center;
+	gap: var(--gap);
+	translate: calc((-1 * (var(--size) + var(--gap)) * var(--tray-position))) 0;
+	transition: translate 450ms linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%);
+}

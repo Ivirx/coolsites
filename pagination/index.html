@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap"
+		/>
+
+		<!-- Links -->
+		<link rel="stylesheet" href="style.css" />
+		<script defer src="script.js"></script>
+
+		<!-- Title -->
+		<title>Pagination Again</title>
+	</head>
+	<body>
+		<main>
+			<button class="pre-button">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					stroke-width="2"
+					stroke="currentColor"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M11 17h6l-4 -5l4 -5h-6l-4 5z"></path>
+				</svg>
+			</button>
+			<section data-total="16" data-current-page="1">
+				<div class="number single" data-value="1">
+					<span>1</span>
+				</div>
+				<div class="number double" data-value="2">
+					<span>2</span>
+					<span>...</span>
+				</div>
+				<div class="tray">
+					<div>
+						<div class="number" data-value="3"><span>3</span></div>
+						<div class="number" data-value="4"><span>4</span></div>
+						<div class="number" data-value="5"><span>5</span></div>
+						<div class="number" data-value="6"><span>6</span></div>
+						<div class="number" data-value="7"><span>7</span></div>
+						<div class="number" data-value="8"><span>8</span></div>
+						<div class="number" data-value="9"><span>9</span></div>
+						<div class="number" data-value="10">
+							<span>10</span>
+						</div>
+						<div class="number" data-value="11">
+							<span>11</span>
+						</div>
+						<div class="number" data-value="12">
+							<span>12</span>
+						</div>
+						<div class="number" data-value="13">
+							<span>13</span>
+						</div>
+						<div class="number" data-value="14">
+							<span>14</span>
+						</div>
+						<div class="number" data-value="15">
+							<span>15</span>
+						</div>
+						<div class="number" data-value="16">
+							<span>16</span>
+						</div>
+						<div class="number" data-value="17">
+							<span>17</span>
+						</div>
+						<div class="number" data-value="18">
+							<span>18</span>
+						</div>
+					</div>
+				</div>
+				<div class="number double dots" data-value="19">
+					<span>19</span>
+					<span>...</span>
+				</div>
+				<div class="number single" data-value="20">
+					<span>20</span>
+				</div>
+			</section>
+			<button class="next-button">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					stroke-width="2"
+					stroke="currentColor"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M13 7h-6l4 5l-4 5h6l4 -5z"></path>
+				</svg>
+			</button>
+		</main>
+	</body>
+</html>
