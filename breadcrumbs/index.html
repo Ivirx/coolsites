@@ -1,0 +1,170 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+		/>
+
+		<!-- CSS -->
+		<style type="text/tailwindcss">
+			@layer utilities {
+				::-webkit-scrollbar {
+					@apply w-1.5 h-1.5;
+				}
+				::-webkit-scrollbar-track {
+					@apply bg-white;
+				}
+				::-webkit-scrollbar-thumb {
+					@apply bg-gray-400 rounded-none;
+				}
+
+				::selection {
+					@apply text-white bg-black;
+				}
+
+				body {
+					@apply font-['Montserrat',sans-serif] text-xs/[1.4] tracking-wide;
+				}
+
+				.font-mono {
+					@apply font-['Major_Mono_Display',monospace] font-bold tracking-normal;
+				}
+
+				[address] {
+					@apply capitalize inline-block cursor-pointer transition-all duration-500;
+				}
+				[address] + span {
+					@apply px-2 inline-block transition-all duration-500;
+				}
+
+				span:has(+ [address].show),
+				[address].show {
+					@apply opacity-100 translate-x-0;
+				}
+				span:has(+ [address].hide),
+				[address].hide {
+					@apply opacity-0 translate-x-4;
+				}
+
+				[route] {
+					@apply py-1 capitalize cursor-pointer transition-colors duration-300;
+				}
+				[route]:hover {
+					@apply text-rose-400;
+				}
+
+				[loading] {
+					@apply opacity-0 transition-opacity duration-500;
+				}
+				[loading].show {
+					@apply opacity-80;
+				}
+			}
+		</style>
+
+		<!-- CDNs -->
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<!-- External Links -->
+		<script defer src="script.js"></script>
+
+		<!-- Title -->
+		<title>Breadcrumbs</title>
+	</head>
+
+	<body
+		class="min-h-screen text-gray-400 bg-indigo-50 bg-gradient-to-br from-transparent via-indigo-50 to-indigo-200 flex justify-center items-center relative isolate"
+	>
+		<main class="w-[clamp(12rem,100%,44rem)] mx-6" _="on load add .load">
+			<section class="p-12 bg-white rounded-[2.25rem]">
+				<div class="flex justify-start items-center gap-2">
+					<h1 class="text-gray-800 text-xl font-semibold">Breadcrumbs</h1>
+					<div loading class="pt-3 flex justify-center items-center gap-0.5">
+						<span
+							class="size-3 bg-black border-4 border-white rounded-full inline-block animate-[bounce_800ms_infinite]"
+						></span>
+						<span
+							class="size-3 bg-black border-4 border-white rounded-full inline-block animate-[bounce_800ms_infinite_75ms]"
+						></span>
+						<span
+							class="size-3 bg-black border-4 border-white rounded-full inline-block animate-[bounce_800ms_infinite_150ms]"
+						></span>
+					</div>
+				</div>
+				<div class="breadcrumbs mt-2">
+					<span class="show" address="change">change</span>
+					<span>/</span>
+					<span class="show delay-[20ms]" address="route">route</span>
+					<span class="delay-[40ms]">/</span>
+					<span class="show delay-[50ms]" address="to">to</span>
+					<span class="delay-[70ms]">/</span>
+					<span class="show delay-[80ms]" address="see">see</span>
+					<span class="delay-[100ms]">/</span>
+					<span class="show delay-[110ms]" address="in">in</span>
+					<span class="delay-[130ms]">/</span>
+					<span class="show delay-[140ms]" address="action">action</span>
+				</div>
+			</section>
+			<section class="mt-5 mr-4 grid gap-2">
+				<div class="flex justify-end items-center gap-2">
+					<span route url="code">code</span>
+					<span>/</span>
+					<span route url="code/debug">debug</span>
+					<span>/</span>
+					<span route url="code/debug/fix">fix</span>
+					<span>/</span>
+					<span route url="code/debug/fix/break">break</span>
+					<span>/</span>
+					<span route url="code/debug/fix/break/googling">googling</span>
+					<span>/</span>
+					<span route url="code/debug/fix/break/googling/stackoverflow">stackoverflow</span>
+				</div>
+				<div class="flex justify-end items-center gap-2">
+					<span route url="potato">potato</span>
+					<span>/</span>
+					<span route url="potato/peel">peel</span>
+					<span>/</span>
+					<span route url="potato/peel/fry">fry</span>
+					<span>/</span>
+					<span route url="potato/peel/fry/ketchup">ketchup</span>
+					<span>/</span>
+					<span route url="potato/peel/fry/ketchup/dip">dip</span>
+					<span>/</span>
+					<span route url="potato/peel/fry/ketchup/dip/bite">bite</span>
+				</div>
+				<div class="flex justify-end items-center gap-2">
+					<span route url="cat">cat</span>
+					<span>/</span>
+					<span route url="cat/sleep">sleep</span>
+					<span>/</span>
+					<span route url="cat/sleep/stare">stare</span>
+					<span>/</span>
+					<span route url="cat/sleep/stare/meow">meow</span>
+					<span>/</span>
+					<span route url="cat/sleep/stare/meow/ignore">ignore</span>
+					<span>/</span>
+					<span route url="cat/sleep/stare/meow/ignore/destroy">destroy</span>
+				</div>
+				<div class="flex justify-end items-center gap-2">
+					<span route url="coffee">coffee</span>
+					<span>/</span>
+					<span route url="coffee/beans">beans</span>
+					<span>/</span>
+					<span route url="coffee/beans/grind">grind</span>
+					<span>/</span>
+					<span route url="coffee/beans/grind/brew">brew</span>
+					<span>/</span>
+					<span route url="coffee/beans/grind/brew/drink">drink</span>
+					<span>/</span>
+					<span route url="coffee/beans/grind/brew/drink/crash">crash</span>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
