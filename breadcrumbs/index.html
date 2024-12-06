@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -53,7 +54,7 @@
 				}
 
 				[route] {
-					@apply py-1 capitalize cursor-pointer transition-colors duration-300;
+					@apply capitalize cursor-pointer transition-colors duration-300;
 				}
 				[route]:hover {
 					@apply text-rose-400;
@@ -64,6 +65,13 @@
 				}
 				[loading].show {
 					@apply opacity-80;
+				}
+
+				main {
+					@apply opacity-0 transition-opacity duration-[800ms] delay-[320ms];
+				}
+				main.load {
+					@apply opacity-100;
 				}
 			}
 		</style>
@@ -81,7 +89,7 @@
 	<body
 		class="min-h-screen text-gray-400 bg-indigo-50 bg-gradient-to-br from-transparent via-indigo-50 to-indigo-200 flex justify-center items-center relative isolate"
 	>
-		<main class="w-[clamp(12rem,100%,44rem)] mx-6" _="on load add .load">
+		<main class="w-[clamp(12rem,100%,44rem)] my-20 mx-6" _="on load add .load">
 			<section class="p-12 bg-white rounded-[2.25rem]">
 				<div class="flex justify-start items-center gap-2">
 					<h1 class="text-gray-800 text-xl font-semibold">Breadcrumbs</h1>
@@ -111,58 +119,186 @@
 					<span class="show delay-[140ms]" address="action">action</span>
 				</div>
 			</section>
-			<section class="mt-5 mr-4 grid gap-2">
-				<div class="flex justify-end items-center gap-2">
-					<span route url="code">code</span>
+
+			<!-- "Tech Stack" Routing System -->
+			<section class="mt-5 ml-4 font-[monospace] grid">
+				<!-- Root -->
+				<div class="flex justify-start items-center gap-2">
+					<span route url="tech-stack">tech-stack</span>
 					<span>/</span>
-					<span route url="code/debug">debug</span>
-					<span>/</span>
-					<span route url="code/debug/fix">fix</span>
-					<span>/</span>
-					<span route url="code/debug/fix/break">break</span>
-					<span>/</span>
-					<span route url="code/debug/fix/break/googling">googling</span>
-					<span>/</span>
-					<span route url="code/debug/fix/break/googling/stackoverflow">stackoverflow</span>
+					<span>. . .</span>
 				</div>
-				<div class="flex justify-end items-center gap-2">
-					<span route url="potato">potato</span>
+
+				<!-- Branch 1: Frontend -->
+				<div class="ml-6 flex justify-start items-center gap-2">
 					<span>/</span>
-					<span route url="potato/peel">peel</span>
+					<span route url="tech-stack/frontend">frontend</span>
 					<span>/</span>
-					<span route url="potato/peel/fry">fry</span>
-					<span>/</span>
-					<span route url="potato/peel/fry/ketchup">ketchup</span>
-					<span>/</span>
-					<span route url="potato/peel/fry/ketchup/dip">dip</span>
-					<span>/</span>
-					<span route url="potato/peel/fry/ketchup/dip/bite">bite</span>
+					<span>. . .</span>
 				</div>
-				<div class="flex justify-end items-center gap-2">
-					<span route url="cat">cat</span>
+				<div class="ml-12 flex justify-start items-center gap-2">
 					<span>/</span>
-					<span route url="cat/sleep">sleep</span>
+					<span route url="tech-stack/frontend/html">html</span>
 					<span>/</span>
-					<span route url="cat/sleep/stare">stare</span>
-					<span>/</span>
-					<span route url="cat/sleep/stare/meow">meow</span>
-					<span>/</span>
-					<span route url="cat/sleep/stare/meow/ignore">ignore</span>
-					<span>/</span>
-					<span route url="cat/sleep/stare/meow/ignore/destroy">destroy</span>
+					<span route url="tech-stack/frontend/html/tags">tags</span>
 				</div>
-				<div class="flex justify-end items-center gap-2">
-					<span route url="coffee">coffee</span>
+				<div class="ml-12 flex justify-start items-center gap-2">
 					<span>/</span>
-					<span route url="coffee/beans">beans</span>
+					<span route url="tech-stack/frontend/css">css</span>
 					<span>/</span>
-					<span route url="coffee/beans/grind">grind</span>
+					<span route url="tech-stack/frontend/css/grid">grid</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
 					<span>/</span>
-					<span route url="coffee/beans/grind/brew">brew</span>
+					<span route url="tech-stack/frontend/javascript">javascript</span>
 					<span>/</span>
-					<span route url="coffee/beans/grind/brew/drink">drink</span>
+					<span route url="tech-stack/frontend/javascript/promises">promises</span>
+				</div>
+
+				<!-- Branch 2: Backend -->
+				<div class="ml-6 flex justify-start items-center gap-2">
 					<span>/</span>
-					<span route url="coffee/beans/grind/brew/drink/crash">crash</span>
+					<span route url="tech-stack/backend">backend</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/backend/nodejs">nodejs</span>
+					<span>/</span>
+					<span route url="tech-stack/backend/nodejs/express">express</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/backend/python">python</span>
+					<span>/</span>
+					<span route url="tech-stack/backend/python/flask">flask</span>
+				</div>
+
+				<!-- Branch 3: Database -->
+				<div class="ml-6 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/database">database</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/database/sql">sql</span>
+					<span>/</span>
+					<span route url="tech-stack/database/sql/joins">joins</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/database/nosql">nosql</span>
+					<span>/</span>
+					<span route url="tech-stack/database/nosql/mongodb">mongodb</span>
+				</div>
+
+				<!-- Branch 4: DevOps -->
+				<div class="ml-6 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/devops">devops</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/devops/docker">docker</span>
+					<span>/</span>
+					<span route url="tech-stack/devops/docker/images">images</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="tech-stack/devops/kubernetes">kubernetes</span>
+					<span>/</span>
+					<span route url="tech-stack/devops/kubernetes/pods">pods</span>
+				</div>
+			</section>
+
+			<!-- "Projects" Routing System -->
+			<section class="mt-5 ml-4 font-[monospace] grid">
+				<!-- Root -->
+				<div class="flex justify-start items-center gap-2">
+					<span route url="projects">projects</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+
+				<!-- Active Projects -->
+				<div class="ml-6 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/active">active</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/active/frontend">frontend</span>
+					<span>/</span>
+					<span route url="projects/active/frontend/ui-design">ui-design</span>
+					<span>/</span>
+					<span route url="projects/active/frontend/ui-design/prototypes">prototypes</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/active/backend">backend</span>
+					<span>/</span>
+					<span route url="projects/active/backend/api-integration">api-integration</span>
+					<span>/</span>
+					<span route url="projects/active/backend/api-integration/security">security</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/active/research">research</span>
+					<span>/</span>
+					<span route url="projects/active/research/ml-models">ml-models</span>
+				</div>
+
+				<!-- Completed Projects -->
+				<div class="ml-6 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/completed">completed</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/completed/mobile-apps">mobile-apps</span>
+					<span>/</span>
+					<span route url="projects/completed/mobile-apps/android">android</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/completed/portfolio">portfolio</span>
+					<span>/</span>
+					<span route url="projects/completed/portfolio/version-2">version-2</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/completed/website-clones">website-clones</span>
+					<span>/</span>
+					<span route url="projects/completed/website-clones/social-media">social-media</span>
+				</div>
+
+				<!-- Archived Projects -->
+				<div class="ml-6 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/archived">archived</span>
+					<span>/</span>
+					<span>. . .</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/archived/failed-attempts">failed-attempts</span>
+					<span>/</span>
+					<span route url="projects/archived/failed-attempts/exploratory">exploratory</span>
+				</div>
+				<div class="ml-12 flex justify-start items-center gap-2">
+					<span>/</span>
+					<span route url="projects/archived/abandoned">abandoned</span>
+					<span>/</span>
+					<span route url="projects/archived/abandoned/unfinished">unfinished</span>
 				</div>
 			</section>
 		</main>
