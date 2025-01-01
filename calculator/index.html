@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+		/>
+
+		<!-- CSS -->
+		<style>
+			:root {
+				--initial-delay: 40ms;
+				--delay: 80ms;
+				--child: 1;
+				--sub-delay: 32ms;
+				--sub-child: 0;
+			}
+
+			[animate],
+			[sub-animate] > * {
+				opacity: 0;
+				translate: -5.2rem 2.4rem;
+				transition: 1000ms cubic-bezier(0.4, 0, 0.2, 1)
+					calc(var(--initial-delay) + ((var(--delay) * var(--child)) + (var(--sub-delay) * var(--sub-child))));
+				transition-property: opacity, translate;
+			}
+
+			main.animate [animate],
+			main.animate [sub-animate] > * {
+				opacity: 1;
+				translate: 0 0;
+			}
+		</style>
+		<!-- Tailwind CSS -->
+		<style type="text/tailwindcss">
+			@layer utilities {
+				::-webkit-scrollbar {
+					@apply w-1.5 h-1.5;
+				}
+				::-webkit-scrollbar-track {
+					@apply bg-white;
+				}
+				::-webkit-scrollbar-thumb {
+					@apply bg-gray-400 rounded-full;
+				}
+
+				::selection {
+					@apply text-white bg-black;
+				}
+
+				.font-mono {
+					@apply font-['Major_Mono_Display',monospace] font-bold tracking-normal;
+				}
+
+				.a-click {
+					@apply aspect-square text-sm/none font-medium bg-[--bg] flex justify-center items-center cursor-pointer transition-colors duration-200 hover:[--bg:theme(colors.slate.200)];
+				}
+
+				.a-click span {
+					@apply pointer-events-none;
+				}
+			}
+		</style>
+
+		<script type="text/hyperscript">
+			on keydown
+				-- log "Key Pressed : " + event.key
+			    if $whiteKeys contains event.key
+			        call keydownEvent(event.key)
+			    end
+			end
+			on click from <[action] />
+			    call keydownEvent(target@action)
+			end
+			def keydownEvent(action)
+			    set display to #display.textContent
+
+			    -- log "action : " + action, "\ndisplayed before : " + display, "\nerror : " + $error
+
+			    if action equals "equals" or action equals "=" or action equals "Enter"
+			        if $error
+			            throw "Already in Error State!"
+			        end
+
+			        set result to eval(display)
+			        if result.toFixed(2).toString().endsWith(".00")
+			            set #display.textContent to result.toFixed(0)
+			        else
+			            set #display.textContent to result.toFixed(2)
+			        end
+
+			        set $error to false
+			        return 0
+			    end
+
+			    if action equals "clear-all"
+			        set #display.textContent to ""
+			        set $error to false
+			        return 0
+			    end
+
+			    if action equals "clear" or action equals "Backspace"
+			        if $error
+			            set #display.textContent to ""
+			        else
+			            set #display.textContent to display.substring(0, display.length - 1)
+			        end
+			        set $error to false
+			        return 0
+			    end
+
+			    if $error
+			        set $error to false
+			        set display to ""
+			    end
+
+			    set #display.textContent to display + action
+			catch e
+			    log e
+			    set $error to true
+			    set #display.textContent to "Error!"
+			end
+			init
+				set $whiteKeys to ["0","1","2","3","4","5","6","7","8","9",".","+","-","*","/","%","=","Enter","Backspace"]
+				set $error to true
+				set #display.textContent to "Welcome!"
+
+				repeat for animate in <[animate]/>
+					animate.style.setProperty('--child', `${animate.getAttribute("animate")}`)
+					repeat for child in animate.querySelectorAll('&[sub-animate]>*') index i
+						child.style.setProperty('--sub-child', `${i+1}`)
+					end
+				end
+			end
+			on load
+				wait 240ms
+				add .animate to #main
+			end
+			on click from <[reanimate]/>
+				remove .animate from #main
+				wait 2.25s
+				add .animate to #main
+			end
+		</script>
+
+		<!-- CDNs -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+
+		<!-- Title -->
+		<title>Calculator</title>
+	</head>
+
+	<body
+		class="min-h-screen text-slate-400 font-['Montserrat',sans-serif] text-sm/[1.4] tracking-wider bg-slate-100 bg-gradient-to-br from-transparent via-slate-200 to-slate-200 flex justify-center items-center"
+	>
+		<main id="main" class="w-[clamp(12rem,100%,18rem)] my-20 mx-6 relative isolate">
+			<div animate="1.5" class="bg-transparent shadow-lg absolute inset-0 -z-50 pointer-events-none"></div>
+			<div animate="1" sub-animate class="pt-20 pb-6 px-6 text-slate-100 bg-slate-500">
+				<p class="text-xl/[1.6] font-mono text-right">
+					<span>&nbsp;</span>
+					<span id="display">Err!</span>
+				</p>
+			</div>
+			<div
+				animate="2"
+				sub-animate
+				class="[--bg:theme(colors.white)] bg-slate-200 grid grid-cols-4 gap-px select-none"
+			>
+				<div>
+					<div action="clear-all" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>CA</span>
+					</div>
+				</div>
+				<div>
+					<div action="%" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>%</span>
+					</div>
+				</div>
+				<div>
+					<div action="clear" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>C</span>
+					</div>
+				</div>
+				<div>
+					<div action="/" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>/</span>
+					</div>
+				</div>
+				<div>
+					<div action="7" class="a-click">
+						<span>7</span>
+					</div>
+				</div>
+				<div>
+					<div action="8" class="a-click">
+						<span>8</span>
+					</div>
+				</div>
+				<div>
+					<div action="9" class="a-click">
+						<span>9</span>
+					</div>
+				</div>
+				<div>
+					<div action="*" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>*</span>
+					</div>
+				</div>
+				<div>
+					<div action="4" class="a-click">
+						<span>4</span>
+					</div>
+				</div>
+				<div>
+					<div action="5" class="a-click">
+						<span>5</span>
+					</div>
+				</div>
+				<div>
+					<div action="6" class="a-click">
+						<span>6</span>
+					</div>
+				</div>
+				<div>
+					<div action="-" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>-</span>
+					</div>
+				</div>
+				<div>
+					<div action="1" class="a-click">
+						<span>1</span>
+					</div>
+				</div>
+				<div>
+					<div action="2" class="a-click">
+						<span>2</span>
+					</div>
+				</div>
+				<div>
+					<div action="3" class="a-click">
+						<span>3</span>
+					</div>
+				</div>
+				<div>
+					<div action="+" class="a-click [--bg:theme(colors.slate.100)]">
+						<span>+</span>
+					</div>
+				</div>
+				<div>
+					<div action="00" class="a-click">
+						<span>00</span>
+					</div>
+				</div>
+				<div>
+					<div action="0" class="a-click">
+						<span>0</span>
+					</div>
+				</div>
+				<div>
+					<div action="." class="a-click">
+						<span>.</span>
+					</div>
+				</div>
+				<div>
+					<div
+						action="equals"
+						class="a-click [--bg:theme(colors.rose.300)] hover:[--bg:theme(colors.rose.400)] text-white"
+					>
+						<span>=</span>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
